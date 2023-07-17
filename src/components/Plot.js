@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import image1 from "../images/img1.jpg";
 import image2 from "../images/img2.jpg";
 import image3 from "../images/img3.jpg";
 import image4 from "../images/img4.jpeg";
 import image5 from "../images/img5.jpg";
 import Header from "./Header";
+import classes from "./Plot.module.css";
 
-const plots = [
+const items = [
   {
     logo: image1,
     name: "Godrej Prima",
@@ -49,17 +50,57 @@ const plots = [
   },
 ];
 const Plot = () => {
-  const items = plots.map((plot, index) => (
-    <Header
-      logo={plot.logo}
-      name={plot.name}
-      flat={plot.flat}
-      nearby={plot.nearby}
-      price={plot.price}
-      key={plot.id}
-    />
-  ));
-  return <>{items}</>;
+  const [plots, setPlots] = useState(items);
+  const lowToHigh = () => {
+    function mycomparator(a, b) {
+      return parseInt(a.price, 10) - parseInt(b.price, 10);
+    }
+    const newPlots = plots.sort(mycomparator);
+    setPlots(newPlots);
+    console.log(plots);
+  };
+  const highToLow = () => {
+    function mycomparator(a, b) {
+      return parseInt(b.price, 10) - parseInt(a.price, 10);
+    }
+    const newPlots = plots.sort(mycomparator);
+    setPlots(newPlots);
+    console.log(plots);
+  };
+  let item;
+  //   item = plots.map((plot, index) => (
+  //     <Header
+  //       logo={plot.logo}
+  //       name={plot.name}
+  //       flat={plot.flat}
+  //       nearby={plot.nearby}
+  //       price={plot.price}
+  //       key={plot.id}
+  //     />
+  //   ));
+  useEffect(() => {
+    item = plots.map((plot, index) => (
+      <Header
+        logo={plot.logo}
+        name={plot.name}
+        flat={plot.flat}
+        nearby={plot.nearby}
+        price={plot.price}
+        key={plot.id}
+      />
+    ));
+  }, [plots]);
+
+  return (
+    <>
+      <div className={classes.sort}>
+        <p>Sort By: </p>
+        <button onClick={lowToHigh}>Low to High</button>
+        <button onClick={highToLow}>High to Low</button>
+      </div>
+      {item}
+    </>
+  );
 };
 
 export default Plot;

@@ -1,0 +1,25 @@
+.sort {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 230px;
+  margin-bottom: -10px;
+}
+.sort p {
+  font-size: 20px;
+  font-style: 500;
+  margin-right: 5px;
+}
+.sort button {
+  background-color: #234;
+  border-radius: 10px;
+  color: #fff;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+}
+button {
+  margin: 2px 5px;
+  cursor: pointer;
+}
