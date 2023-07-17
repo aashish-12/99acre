@@ -9,12 +9,12 @@ section {
   margin: 10px auto;
   display: flex;
   justify-content: flex-start;
+  position: relative;
 }
 .img {
   z-index: 1;
   display: flex;
   justify-content: flex-start;
-  position: relative;
 }
 .img img {
   height: 400px;
@@ -26,7 +26,7 @@ section {
   display: flex;
   justify-content: left;
   position: absolute;
-  width: 52%;
+  width: 70%;
   height: 350px;
   align-items: left;
   border-top-left-radius: 10px;
@@ -34,7 +34,7 @@ section {
   background-color: #fff;
   z-index: 10;
   top: 35px;
-  left: 500px;
+  left: 300px;
   flex-direction: column;
   padding: 30px;
   box-sizing: border-box;
