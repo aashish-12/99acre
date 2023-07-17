@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import image1 from "../images/img1.jpg";
 import image2 from "../images/img2.jpg";
 import image3 from "../images/img3.jpg";
@@ -52,56 +52,23 @@ const Plot = () => {
   ];
   const [plots, setPlots] = useState(items);
   const [sortOrder, setSortOrder] = useState("none");
-
   const lowToHigh = () => {
-    const sortedPlots = [...plots].sort((a, b) => a.price - b.price);
-    setPlots(sortedPlots);
     setSortOrder("lowToHigh");
   };
 
   const highToLow = () => {
-    const sortedPlots = [...plots].sort((a, b) => b.price - a.price);
-    setPlots(sortedPlots);
     setSortOrder("highToLow");
   };
 
-  const renderPlots = () => {
+  useEffect(() => {
     if (sortOrder === "lowToHigh") {
-      return plots.map((plot) => (
-        <Header
-          logo={plot.logo}
-          name={plot.name}
-          flat={plot.flat}
-          nearby={plot.nearby}
-          price={plot.price}
-          key={plot.id}
-        />
-      ));
+      const sortedPlots = [...items].sort((a, b) => a.price - b.price);
+      setPlots(sortedPlots);
     } else if (sortOrder === "highToLow") {
-      return plots.map((plot) => (
-        <Header
-          logo={plot.logo}
-          name={plot.name}
-          flat={plot.flat}
-          nearby={plot.nearby}
-          price={plot.price}
-          key={plot.id}
-        />
-      ));
-    } else {
-      // Initial rendering without sorting
-      return items.map((plot) => (
-        <Header
-          logo={plot.logo}
-          name={plot.name}
-          flat={plot.flat}
-          nearby={plot.nearby}
-          price={plot.price}
-          key={plot.id}
-        />
-      ));
+      const sortedPlots = [...items].sort((a, b) => b.price - a.price);
+      setPlots(sortedPlots);
     }
-  };
+  }, [sortOrder]);
 
   return (
     <>
@@ -110,7 +77,16 @@ const Plot = () => {
         <button onClick={lowToHigh}>Low to High</button>
         <button onClick={highToLow}>High to Low</button>
       </div>
-      {renderPlots()}
+      {plots.map((plot) => (
+        <Header
+          logo={plot.logo}
+          name={plot.name}
+          flat={plot.flat}
+          nearby={plot.nearby}
+          price={plot.price}
+          key={plot.id}
+        />
+      ))}
     </>
   );
 };
